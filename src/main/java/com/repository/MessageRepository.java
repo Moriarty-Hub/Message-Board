@@ -6,7 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MessageRepository extends CrudRepository<Message, Integer> {
 
-    @Query("SELECT message FROM Message message ORDER BY message.id DESC")
-    Iterable<Message> findAllOrOrderByCreateTimeDesc();
-
+    Iterable<Message> findAllByOrderByCreateTimeDesc();
 }

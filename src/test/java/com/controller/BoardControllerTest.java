@@ -58,7 +58,7 @@ public class BoardControllerTest {
         HttpSession httpSession = mock(HttpSession.class);//上面方法和这个都使用到了Model和HttpSession对象可以考虑提取为全局对象
         Iterable<Message> messageIterable = Collections.singletonList(new Message());// 构造要返回的对象
         when(httpSession.getAttribute(anyString())).thenReturn("DXR"); //期望方法返回，非null值，对应if分支
-        when(messageRepository.findAllOrOrderByCreateTimeDesc()).thenReturn(messageIterable); //期望其他类的B方法给我返回我希望的值
+        when(messageRepository.findAllByOrderByCreateTimeDesc()).thenReturn(messageIterable); //期望其他类的B方法给我返回我希望的值
         String messageList = boardController.getMessageList(model, httpSession); //调用方法
         Assertions.assertThat(messageList).isEqualTo("board"); //断言返回值是否正确
         verify(model, times(1)).addAttribute(anyString(), any()); // 同上，注意第二个是any（），不是anyString（）
