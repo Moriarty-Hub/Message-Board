@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Board</title>
+</head>
+<body>
+    <p>--------------------------------------------</p>
+    Submit new message<br>
+    <form action="/add-message" method="post">
+        Message: <input type="text" name="messageContent">
+        <input type="submit" value="Submit">
+    </form>
+    <p>--------------------------------------------</p>
+    <p>Message Board Content</p>
+    <p>***************</p>
+    <div th:each="message, i : ${messageList}">
+        <div th:text="'ID: ' + ${i.count}"></div><br>
+        <div th:text="'Content: ' + ${message.getContent()}"></div><br>
+        <div th:text="'Creator: ' + ${message.getCreator()}"></div><br>
+        <div th:text="'Created time: ' + ${message.getCreateTime()}"></div><br>
+        <p>***************</p><br>
+    </div>
+</body>
+</html>
