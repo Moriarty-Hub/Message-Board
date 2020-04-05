@@ -1,8 +1,5 @@
 package com.controller;
 
-import com.ToolKit;
-import com.entity.User;
-import com.repository.UserRepository;
 import com.service.IndexService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +36,7 @@ public class IndexController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String showRegisterPage() {
         return "register";
     }
 

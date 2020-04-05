@@ -33,7 +33,9 @@ public class BoardController {
 
     @PostMapping("/add-message")
     public String addMessage(@RequestParam String messageContent, Model model, HttpSession httpSession) {
-        boardService.addMessage((String)httpSession.getAttribute("username"), messageContent, model);
+        boardService.addMessage((String)httpSession.getAttribute("username"), messageContent);
+        model.addAttribute("info", "Your message has submitted successfully");
+        model.addAttribute("redirectedPage", "board");
         return "intermediate-page";
     }
 

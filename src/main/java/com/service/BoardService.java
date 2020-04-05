@@ -3,7 +3,6 @@ package com.service;
 import com.entity.Message;
 import com.repository.MessageRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +16,7 @@ public class BoardService {
         this.messageRepository = messageRepository;
     }
 
-    public void addMessage(String username, String messageContent, Model model) {
+    public void addMessage(String username, String messageContent) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = simpleDateFormat.format(date);
@@ -26,8 +25,6 @@ public class BoardService {
         message.setContent(messageContent);
         message.setCreateTime(createTime);
         messageRepository.save(message);
-        model.addAttribute("info", "Your message has submitted successfully");
-        model.addAttribute("redirectedPage", "board");
     }
 
     public Iterable<Message> getAllMessageOrderByCreateTimeDesc() {
