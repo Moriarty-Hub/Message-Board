@@ -2,7 +2,7 @@
 
     再比如，我在BoardController.java的addMessage方法中给model添加了attribute，我想在测试的时候再对model调用一下getAttribute来检查一下值是否正确，应该怎么办呢？尝试过使用@InjectMocks去自动注入Model，但由于它是一个接口，所以这个办法行不通。（我在IndexControllerTest.java的test2LogIn()中尝试了一种办法，就是在verify中把原来的anystring()替换为我实际期望的值，测试发现可行，但不知道是否符合标准）
 
-2. 在IndexControllerTest.java中的这个位置出现了一个报错，显示是第73行中期望的matcher数量和实际输入的不符，该怎么知道到底需要几个matcher以及应该放在参数中的哪个位置呢？![image-20200405165305184](C:\Users\samdo\AppData\Roaming\Typora\typora-user-images\image-20200405165305184.png)
+2. 在IndexControllerTest.java中的这个位置出现了一个报错，显示是第73行中期望的matcher数量和实际输入的不符，该怎么知道到底需要几个matcher以及应该放在参数中的哪个位置呢？![image-20200405165305184](D:\TDMU\Week 01\MessageBoard\image-20200405165305184.png)
 
     
 
