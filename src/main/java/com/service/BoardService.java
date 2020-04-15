@@ -1,34 +1,32 @@
 package com.service;
 
-import com.entity.Message;
-import com.repository.MessageRepository;
+import com.bean.Message;
+import com.mapper.MessageMapper;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BoardService {
 
-    private final MessageRepository messageRepository;
+    private final MessageMapper messageMapper;
 
-    public BoardService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    public BoardService(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
     }
 
-    public void addMessage(String username, String messageContent) {
+    public void addMessage(String creator, String content) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String createTime = simpleDateFormat.format(date);
-        Message message = new Message();
-        message.setCreator(username);
-        message.setContent(messageContent);
-        message.setCreateTime(createTime);
-        messageRepository.save(message);
+        String createdTime = simpleDateFormat.format(date);
+        messageMapper.insertNewMessage(UUID.randomUUID().toString(), content, createdTime, creator);
     }
 
-    public Iterable<Message> getAllMessageOrderByCreateTimeDesc() {
-        return messageRepository.findAllByOrderByCreateTimeDesc();
+    public List<Message> getAllMessageOrderByCreateTimeDesc() {
+        return messageMapper.selectAllMessageOrderByCreatedTimeDesc();
     }
 
 }

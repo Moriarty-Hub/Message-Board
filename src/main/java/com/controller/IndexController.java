@@ -1,38 +1,22 @@
 package com.controller;
 
-import com.service.IndexService;
+import com.service.RegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class IndexController {
 
-    private final IndexService indexService;
+    private final RegisterService registerService;
 
-    public IndexController(IndexService indexService) {
-        this.indexService = indexService;
+    public IndexController(RegisterService registerService) {
+        this.registerService = registerService;
     }
 
-    @GetMapping("/index")
-    public String showIndexPage() {
-        return "index";
-    }
-
-    @PostMapping("/log-in")
-    public String logIn(@RequestParam String username, @RequestParam String password, Model model, HttpSession httpSession) {
-        boolean result = indexService.verifyUser(username, password);
-        if (result) {
-            model.addAttribute("info", "You have logged in");
-            model.addAttribute("redirectedPage", "board");
-        } else {
-            httpSession.setAttribute("username", username);
-            model.addAttribute("info", "Your username or password is not correct");
-            model.addAttribute("redirectedPage", "index");
-        }
-        return "intermediate-page";
+    @GetMapping("/login")
+    public String showLogInPage() {
+        return "login";
     }
 
     @GetMapping("/register")
@@ -41,20 +25,17 @@ public class IndexController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password1, @RequestParam String password2, Model model) {
+    public String register(@RequestParam String username, @RequestParam String password, @RequestParam String confirmPassword, Model model) {
 
-        if (indexService.isUsernameExist(username)) {  // The username has already exist.
+        if (registerService.isUsernameExist(username)) {  // The username has already exist.
             model.addAttribute("info", "This username has already exist, please choose another one");
-            model.addAttribute("redirectedPage", "register");
-        } else if (!password1.equals(password2)) {  // The two password are not equals.
+            return "register";
+        } else if (!password.equals(confirmPassword)) {  // The two password are not equals.
             model.addAttribute("info", "Your password is not correct, please input again");
-            model.addAttribute("redirectedPage", "register");
+            return "register";
         } else {  // Valid username and password.
-            indexService.addNewUser(username, password1);
-            model.addAttribute("info", "You have registered successfully, please log in");
-            model.addAttribute("redirectedPage", "index");
+            registerService.addNewUser(username, password);
+            return "login";
         }
-
-        return "intermediate-page";
     }
 }

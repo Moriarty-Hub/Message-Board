@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Message Board</title>
@@ -8,7 +8,7 @@
     <p>--------------------------------------------</p>
     Submit new message<br>
     <form action="/add-message" method="post">
-        Message: <input type="text" name="messageContent">
+        Message: <label><input type="text" name="messageContent"></label>
         <input type="submit" value="Submit">
     </form>
     <p>--------------------------------------------</p>
@@ -18,7 +18,7 @@
         <div th:text="'ID: ' + ${i.count}"></div><br>
         <div th:text="'Content: ' + ${message.getContent()}"></div><br>
         <div th:text="'Creator: ' + ${message.getCreator()}"></div><br>
-        <div th:text="'Created time: ' + ${message.getCreateTime()}"></div><br>
+        <div th:text="'Created time: ' + ${message.getCreatedTime()}"></div><br>
         <p>***************</p><br>
     </div>
 </body>
