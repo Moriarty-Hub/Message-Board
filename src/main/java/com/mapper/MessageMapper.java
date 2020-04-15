@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.bean.Message;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,4 +18,7 @@ public interface MessageMapper {
 
     @Insert("INSERT INTO message(id, content, created_time, creator) VALUES(#{id}, #{content}, #{created_time}, #{creator})")
     void insertNewMessage(String id, String content, String created_time, String creator);
+
+    @Delete("DELETE FROM message WHERE id = #{id}")
+    void deleteMessageById(String id);
 }

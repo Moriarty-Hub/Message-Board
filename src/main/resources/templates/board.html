@@ -19,6 +19,12 @@
         <div th:text="'Content: ' + ${message.getContent()}"></div><br>
         <div th:text="'Creator: ' + ${message.getCreator()}"></div><br>
         <div th:text="'Created time: ' + ${message.getCreatedTime()}"></div><br>
+        <div th:if="${isAdministrator}">
+            <form action="/delete-message" method="post">
+                <input name="index" th:value="${i.count}" hidden>
+                <input type="submit" value="Delete">
+            </form>
+        </div>
         <p>***************</p><br>
     </div>
 </body>

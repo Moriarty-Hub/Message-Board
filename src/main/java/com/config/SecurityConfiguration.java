@@ -29,6 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/board").hasAuthority(Role.NORMAL_USER.toString())
+                .antMatchers("/add-message").hasAuthority(Role.NORMAL_USER.toString())
+                .antMatchers("/delete-message").hasAuthority(Role.ADMINISTRATOR.toString())
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/board");
     }
