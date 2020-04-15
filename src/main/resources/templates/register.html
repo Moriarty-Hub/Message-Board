@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Register Page</title>
 </head>
 <body>
     <p>Please fill the form for becoming our new user</p>
-    <form action="" method="post">
+    <p th:if="${isUsernameExist}">The username has already exist, please choose another one.</p>
+    <p th:if="${isPasswordNotEquals}">The two password are not equals</p>
+    <form action="/register" method="post">
         Username: <label><input type="text" name="username"></label><br>
         Password: <label><input type="password" name="password"></label><br>
         Confirm password: <label><input type="password" name="confirmPassword"></label><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"> &nbsp;&nbsp; <input type="reset" value="Reset">
     </form>
 </body>
 </html>
