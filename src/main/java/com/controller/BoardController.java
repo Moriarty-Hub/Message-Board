@@ -2,16 +2,12 @@ package com.controller;
 
 import com.bean.Role;
 import com.service.BoardService;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
@@ -33,7 +29,7 @@ public class BoardController {
     }
 
     @PostMapping("/add-message")
-    public String addMessage(@RequestParam String messageContent, Model model, HttpSession httpSession) {
+    public String addMessage(@RequestParam String messageContent, Model model) {
         boardService.addMessage(SecurityContextHolder.getContext().getAuthentication().getName(), messageContent);
         model.addAttribute("messageList", boardService.getAllMessageOrderByCreateTimeDesc());
         return showBoardPage(model);
